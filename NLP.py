@@ -73,7 +73,7 @@ unigram_freq = Counter(unigrams)
 bigram_freq = Counter(bigrams)
 trigram_freq = Counter(trigrams)
 
-# 🔮 Next-word prediction using bigram/trigram
+#  Next-word prediction using bigram/trigram
 def predict_next_word(context, n=3):
     context = tuple(context.lower().split())
     if len(context) == 1:
@@ -89,13 +89,13 @@ def predict_next_word(context, n=3):
     sorted_candidates = sorted(candidates.items(), key=lambda item: item[1], reverse=True)
     return [word for word, _ in sorted_candidates[:n]]
 
-# 🛠 Basic Autocorrect Simulation using Trigram Context
+#  Basic Autocorrect Simulation using Trigram Context
 def autocorrect_trigram(context):
     w1, w2 = context.lower().split()
     possibilities = [k[2] for k in trigram_freq if k[0] == w1 and k[1] == w2]
     return max(possibilities, key=lambda word: trigram_freq[(w1, w2, word)], default="No suggestion")
 
-# 🧪 Example Usage
+#  Example Usage
 print("Unigram Frequency (top 5):", unigram_freq.most_common(5))
 print("Next word after 'i am':", predict_next_word("i am"))
 print("Next word after 'let's':", predict_next_word("let's"))
